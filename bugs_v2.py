@@ -79,7 +79,7 @@ def process_links(initial_url, posts_limit=None, links_limit=None):
     collecting_stop_event.set()
     collecting_thread.join()
     sys.stdout.write('\r' + ' ' * 50)  # 用空格覆盖上一行输出
-    sys.stdout.write('\r✓ 信息搜集完毕\n')
+    sys.stdout.write(f'\r✓ 信息搜集完毕，共有{total_links}个导出任务需要执行\n')
     sys.stdout.flush()
     
     success_count = 0
