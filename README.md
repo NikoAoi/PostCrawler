@@ -26,7 +26,7 @@ PostCrawler是一个用于爬取网站：[技术文章摘抄](https://learn.lian
 
 
 
-略
+[官方教程](https://ubuntu.com/tutorials/install-ubuntu-desktop#1-overview)
 
 
 
