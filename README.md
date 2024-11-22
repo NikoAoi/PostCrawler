@@ -1,5 +1,7 @@
 # PostCrawler
 
+
+
 [![GitHub Stars](https://img.shields.io/github/stars/NikoAoi/PostCrawler?style=social)](https://github.com/NikoAoi/PostCrawler/stargazers) [![GitHub Forks](https://img.shields.io/github/forks/NikoAoi/PostCrawler?style=social)](https://github.com/NikoAoi/PostCrawler/network/members)
 
 PostCrawler是一个用于爬取网站：[技术文章摘抄](https://learn.lianglianglee.com/)上的文章的爬虫
@@ -11,6 +13,8 @@ PostCrawler是一个用于爬取网站：[技术文章摘抄](https://learn.lian
 
 
 ## 使用到以下组件或工具
+
+
 
 | 组件或工具                           | 版本                               | 链接                                              |
 | :----------------------------------- | ---------------------------------- | ------------------------------------------------- |
@@ -59,20 +63,39 @@ sudo apt install ./google-chrome-stable_current_amd64.deb
 
 引用自[组件的github](https://github.com/gildas-lormeau/single-file-cli)
 
-> - Download and unzip manually the [master archive](https://github.com/gildas-lormeau/single-file-cli/archive/master.zip) provided by Github
+>* Download and unzip manually the [master archive](https://github.com/gildas-lormeau/single-file-cli/archive/master.zip) provided by Github
 >
->   ```shell
->   unzip master.zip .
->   cd single-file-cli-master
->   ```
+>```shell
+>unzip master.zip .
+>cd single-file-cli-master
+>```
+>
+>* Make `single-file` executable (Linux/Unix/BSD etc.).
+>
+>```shell
+>chmod +x single-file
+>```
 
->
->
->- Make `single-file` executable (Linux/Unix/BSD etc.).
->
->  ```
->  chmod +x single-file
->  ```
+
+
+最后一步，将single-file加入bash path：
+
+```shell
+vim ~/.bashrc
+```
+
+在最后一行添上：
+
+```shell
+# singlefile-folder-path是你解压出来的singlefile目录路径
+export PATH={singlefile-folder-path}:$PATH
+```
+
+之后，重新打开一个窗口，或在当前窗口执行以下命令使环境变量生效：
+
+```
+source ~/.bashrc
+```
 
 
 
@@ -80,8 +103,12 @@ sudo apt install ./google-chrome-stable_current_amd64.deb
 
 
 
+## 命令
+
+
+
 ```
-python bugs_v2.py [-h] [--posts_limit POSTS_LIMIT] [--links_limit LINKS_LIMIT] [--timeout TIMEOUT] [--output_dir OUTPUT_DIR] url
+python crawler.py [-h] [--posts_limit POSTS_LIMIT] [--links_limit LINKS_LIMIT] [--timeout TIMEOUT] [--output_dir OUTPUT_DIR] url
 ```
 
 
@@ -100,17 +127,17 @@ python bugs_v2.py [-h] [--posts_limit POSTS_LIMIT] [--links_limit LINKS_LIMIT] [
 
 
 
-## 使用方法
+## 快速开始
 
 
 
 ```shell
-python bugs.py [-h] [--posts_limit POSTS_LIMIT] [--links_limit LINKS_LIMIT] [--timeout TIMEOUT] url
+python crawler.py "https://learn.lianglianglee.com"
 ```
 
 
 
-执行后，脚本会在当前目录下创建一个目录用于存放所有下载的文章
+执行后，会在脚本所在的目录下创建一个以`posts_{timestamp}`命名的目录，并将[技术文章摘抄](https://learn.lianglianglee.com)首页的所有文章下载到该目录
 
 
 
