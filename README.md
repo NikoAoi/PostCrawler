@@ -1,8 +1,6 @@
 # PostCrawler
 
-[![GitHub Stars](https://img.shields.io/github/stars/NikoAoi/PostCrawler?style=social)](https://github.com/NikoAoi/PostCrawler/stargazers)
-
-[![GitHub Forks](https://img.shields.io/github/forks/NikoAoi/PostCrawler?style=social)](https://github.com/NikoAoi/PostCrawler/network/members)
+[![GitHub Stars](https://img.shields.io/github/stars/NikoAoi/PostCrawler?style=social)](https://github.com/NikoAoi/PostCrawler/stargazers) [![GitHub Forks](https://img.shields.io/github/forks/NikoAoi/PostCrawler?style=social)](https://github.com/NikoAoi/PostCrawler/network/members)
 
 PostCrawler是一个用于爬取网站：[技术文章摘抄](https://learn.lianglianglee.com/)上的文章的爬虫
 
