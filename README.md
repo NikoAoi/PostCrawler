@@ -92,6 +92,7 @@ python bugs_v2.py <url> [--posts_limit {number}] [--links_limit {number}]
 
 | 参数        | 说明                                                         |
 | :---------- | :----------------------------------------------------------- |
+| help        | 列举脚本参数及说明                                           |
 | url         | 要爬取的页面的链接，但实际上这个脚本只适配了[技术文章摘抄](https://learn.lianglianglee.com/)这个网站首页的页面结构，所以一般是写死的；有需要的话可以自己改造脚本来适应不同网站的页面结构 |
 | posts_limit | [技术文章摘抄](https://learn.lianglianglee.com/)首页的一个文章合集我称为一个posts（例如，[10x程序员工作法](https://learn.lianglianglee.com/专栏/10x程序员工作法)就是一个posts），这个参数用于限制爬虫最终爬取的文章合集的数量，例如，当使用 `--posts_limit 1` 作为参数时，表示只会爬取第一个文章合集；不指明该参数时，将会爬取所有文章合集 |
 | links_limit | 这个参数用于设置爬虫最终爬取文章合集中的文章的数量，当使用 --links_limit 1 作为参数时，表示只会爬取每个文章合集里的第一篇文章；不指明该参数时，将会爬取文章合集里的所有文章 |
@@ -102,8 +103,8 @@ python bugs_v2.py <url> [--posts_limit {number}] [--links_limit {number}]
 
 
 
-```
-python bugs_v2.py "https://learn.lianglianglee.com"
+```shell
+python bugs.py [-h] [--posts_limit POSTS_LIMIT] [--links_limit LINKS_LIMIT] [--timeout TIMEOUT] url
 ```
 
 
@@ -121,8 +122,8 @@ python bugs_v2.py "https://learn.lianglianglee.com"
 | Task                                                         | Status |
 | :----------------------------------------------------------- | :----- |
 | 完成脚本的第一个版本                                         | ✔      |
-| 将脚本执行过程中产生的日志输出到文件中                       | ❌      |
+| 将脚本执行过程中产生的日志输出到文件中                       | ✔      |
 | 加入重试机制，所有导出任务完成后重新下载那些没有下载成功的html | ❌      |
-| 加入下载超时机制，某条链接下载时超过指定时间仍未能下载完成，则打印错误日志，之后直接下载下一条连接 | ❌      |
-| 断点续传机制。新增一个指定下载目录的参数，下载HTML前会判断目录中是否已存在该文件，若存在则跳过 | ❌      |
+| 加入下载超时机制，某条链接下载时超过指定时间仍未能下载完成，则打印错误日志，之后直接下载下一条连接 | ✔      |
+| 断点续传机制。新增一个指定下载目录的参数，下载HTML前会判断目录中是否已存在该文件，若存在则跳过 | ✔      |
 
