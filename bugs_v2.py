@@ -13,6 +13,7 @@ from multiprocessing import Value
 import logging
 import signal
 from functools import partial
+from collections import deque
 
 def extract_links(url):
     """
@@ -124,6 +125,9 @@ def process_links(initial_url, posts_limit=None, links_limit=None, timeout=30, o
         ]
     )
     
+    # 创建失败队列
+    failed_queue = deque()
+    
     logging.info(f"开始爬取任务，初始URL: {initial_url}")
     
     # 创建停止事件和动画线程用于信息搜集阶段
@@ -197,6 +201,8 @@ def process_links(initial_url, posts_limit=None, links_limit=None, timeout=30, o
                     success_count += 1
                 else:
                     failed_count += 1
+                    # 将失败的下载任务添加到失败队列
+                    failed_queue.append((sub_url, output_file, sub_text))
                     
                 downloaded_count += 1
                 
@@ -218,6 +224,8 @@ def process_links(initial_url, posts_limit=None, links_limit=None, timeout=30, o
                 if os.path.exists(output_file):
                     os.remove(output_file)
                     logging.info(f"清理异常处理的文件: {output_file}")
+                # 将失败的下载任务添加到失败队列
+                failed_queue.append((sub_url, output_file, sub_text))
             
             delay = random.uniform(0.1, 0.3)
             time.sleep(delay)
@@ -231,6 +239,32 @@ def process_links(initial_url, posts_limit=None, links_limit=None, timeout=30, o
         sys.stdout.write(f'\r✓ 第 {idx} 个导出任务已完成\n')
         sys.stdout.flush()
         logging.info(f"完成第 {idx} 个导出任务")
+    
+    # 处理失败队列中的任务
+    if failed_queue:
+        print("\n开始重试失败的下载任务...")
+        logging.info(f"开始重试 {len(failed_queue)} 个失败的下载任务")
+        retry_failed = 0
+        retry_success = 0
+        
+        while failed_queue:
+            sub_url, output_file, sub_text = failed_queue.popleft()
+            print(f"\r正在重试下载: {sub_text}")
+            
+            if download_html(sub_url, output_file, timeout):
+                retry_success += 1
+                success_count += 1
+                failed_count -= 1
+                logging.info(f"重试成功: {sub_text}")
+            else:
+                retry_failed += 1
+                logging.error(f"重试失败: {sub_text}")
+                print(f"重试失败: {sub_text}")
+            
+            time.sleep(random.uniform(0.1, 0.3))
+        
+        print(f"\n重试完成: 成功 {retry_success} 个, 失败 {retry_failed} 个")
+        logging.info(f"重试完成: 成功 {retry_success} 个, 失败 {retry_failed} 个")
     
     # 显示最终导出结果
     final_message = f"所有导出任务完成，成功导出 {success_count} 个页面, 失败 {failed_count} 个"
