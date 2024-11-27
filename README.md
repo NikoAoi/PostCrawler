@@ -123,6 +123,7 @@ python crawler.py [-h] [--posts_limit POSTS_LIMIT] [--links_limit LINKS_LIMIT] [
 | url         | 是   | 要爬取的页面的链接，但实际上这个脚本只适配了[技术文章摘抄](https://learn.lianglianglee.com/)这个网站首页的页面结构，所以一般是写死的；有需要的话可以自己改造脚本来适应不同网站的页面结构 |
 | posts_limit | 否   | [技术文章摘抄](https://learn.lianglianglee.com/)首页的一个文章合集我称为一个posts（例如，[10x程序员工作法](https://learn.lianglianglee.com/专栏/10x程序员工作法)就是一个posts），这个参数用于限制爬虫最终爬取的文章合集的数量，例如，当使用 `--posts_limit 1` 作为参数时，表示只会爬取第一个文章合集；不指明该参数时，将会爬取所有文章合集 |
 | links_limit | 否   | 这个参数用于设置爬虫最终爬取文章合集中的文章的数量，当使用 --links_limit 1 作为参数时，表示只会爬取每个文章合集里的第一篇文章；不指明该参数时，将会爬取文章合集里的所有文章 |
+| timeout     | 否   | 这个参数用于指定HTML文件下载间隔，防止触发网站的反爬虫措施。不指定该参数时默认设置为30s |
 | output_dir  | 否   | 指定要下载文件的保存目录，不指明该参数时，将默认在脚本所在目录下创建一个以`posts_{timestamp}`命名的目录 |
 
 
